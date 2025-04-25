@@ -26,12 +26,12 @@ const styles = StyleSheet.create({
     borderRadius: 12,
   },
   textInput: {
-    width: 50,
+    width: 60,
     borderBottomWidth: 3,
     borderBottomColor: "#e00ff8",
     marginBottom: 10,
-    fontSize: 20,
-    height: 50,
+    fontSize: 40,
+    height: 90,
     color: "#ffffff",
   },
 });
