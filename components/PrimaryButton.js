@@ -29,15 +29,15 @@ const styles = StyleSheet.create({
     elevation: 3,
   },
   buttonOuterContainer: {
-    width: "200",
-    margin: 10,
+    //width: "150",
+    margin: 5,
     borderRadius: 28,
     overflow: "hidden",
   },
   buttonText: {
     color: "white",
     textAlign: "center",
-    fontSize: 20,
+    fontSize: 16,
   },
   pressedonIOS: {
     opacity: 0.75,
