@@ -1,9 +1,10 @@
 import { Text, StyleSheet, View } from "react-native";
 import PrimaryButton from "../components/PrimaryButton";
+import Title from "../components/Title";
 function GameScreen() {
   return (
     <View style={styles.wholeScreen}>
-      <Text style={styles.title}>I am guessing...</Text>
+      <Title />
       <View style={styles.guessContainer}>
         <View style={styles.displayGuess}>
           <Text>---Number displayed here--</Text>
@@ -50,7 +51,6 @@ const styles = StyleSheet.create({
     borderWidth: 4,
     backgroundColor: "#bf80b9",
   },
-  iAmGussing: {},
   buttonsHolder: {
     flexDirection: "row",
   },
