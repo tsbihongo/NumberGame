@@ -12,7 +12,7 @@ export default function App() {
     finalNumberUpdater(finalNumberReceived);
   }
   screen = finalNumber ? (
-    <GameScreen />
+    <GameScreen userInput={finalNumber} />
   ) : (
     <StartGameScreen onGameStart={startGameHandler} />
   );
