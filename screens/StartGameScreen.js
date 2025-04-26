@@ -1,19 +1,71 @@
-import { View, TextInput, Pressable, StyleSheet } from "react-native";
+import { View, TextInput, Pressable, StyleSheet, Alert } from "react-native";
 import PrimaryButton from "../components/PrimaryButton";
-function StartGameScreen() {
+import { useState } from "react";
+function StartGameScreen({ onGameStart }) {
+  const [enteredNumber, numberUpdater] = useState("");
+  let [mistakeCount, mistakeCountUpdater] = useState(0);
+
+  function enteredTextHandler(enteredText) {
+    numberUpdater(enteredText);
+  }
+
+  function confirmNumber() {
+    const finalNumber = parseInt(enteredNumber); //converting string to number
+
+    if (isNaN(finalNumber) || finalNumber <= 0 || finalNumber > 99) {
+      mistakeCount++;
+      mistakeCountUpdater(mistakeCount);
+      if (mistakeCount < 3) {
+        Alert.alert(
+          "Invalid input! Sorry!",
+          "Input has to be a number between 1 and 99 (inclusive)",
+          [
+            {
+              text: "Alright!",
+              style: "destructive",
+              onPress: resetInputHandler,
+            },
+          ]
+        );
+      } else {
+        Alert.alert(
+          "Are you Stupid??",
+          "Do you not understand English? The number has to be in between 1 and 99 (inclusive)!",
+          [
+            {
+              text: "Sorry I am stupid.",
+              style: "destructive",
+              onPress: resetInputHandler,
+            },
+          ]
+        );
+        mistakeCountUpdater(0);
+      }
+    } else {
+      onGameStart(finalNumber);
+    }
+
+    return;
+  }
+  function resetInputHandler() {
+    numberUpdater("");
+  }
+
   return (
     <View style={styles.inputContainer}>
       <TextInput
         style={styles.textInput}
         maxLength={2}
         keyboardType="number-pad"
+        value={enteredNumber}
+        onChangeText={enteredTextHandler}
       />
       <View style={styles.buttonsContainer}>
         <View style={styles.buttonContainer}>
-          <PrimaryButton>Reset</PrimaryButton>
+          <PrimaryButton onTap={resetInputHandler}>Reset</PrimaryButton>
         </View>
         <View style={styles.buttonContainer}>
-          <PrimaryButton>Confirm</PrimaryButton>
+          <PrimaryButton onTap={confirmNumber}>Confirm</PrimaryButton>
         </View>
       </View>
     </View>
