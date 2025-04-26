@@ -1,6 +1,7 @@
 import { View, TextInput, Pressable, StyleSheet, Alert } from "react-native";
 import PrimaryButton from "../components/PrimaryButton";
 import { useState } from "react";
+import Colors from "../utils/Colors";
 function StartGameScreen({ onGameStart }) {
   const [enteredNumber, numberUpdater] = useState("");
   let [mistakeCount, mistakeCountUpdater] = useState(0);
@@ -75,7 +76,7 @@ function StartGameScreen({ onGameStart }) {
 const styles = StyleSheet.create({
   inputContainer: {
     //flex: 1,
-    backgroundColor: "#9a4c93",
+    backgroundColor: Colors.boxColor,
     marginTop: 150,
     marginHorizontal: 70,
     padding: 30,

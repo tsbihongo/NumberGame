@@ -1,10 +1,11 @@
 import { Text, StyleSheet, View } from "react-native";
 import PrimaryButton from "../components/PrimaryButton";
 import Title from "../components/Title";
+import Colors from "../utils/Colors";
 function GameScreen() {
   return (
     <View style={styles.wholeScreen}>
-      <Title />
+      <Title>I am guessing...</Title>
       <View style={styles.guessContainer}>
         <View style={styles.displayGuess}>
           <Text>---Number displayed here--</Text>
@@ -30,7 +31,7 @@ const styles = StyleSheet.create({
   guessContainer: {
     height: 300,
     width: 250,
-    backgroundColor: "#9a4c93",
+    backgroundColor: Colors.boxColor,
     justifyContent: "center",
     padding: 10,
     alignItems: "center",
@@ -40,7 +41,7 @@ const styles = StyleSheet.create({
   title: {
     textAlign: "center",
     fontSize: 24,
-    color: "white",
+    color: Colors.titleColor,
     fontWeight: "bold",
     borderWidth: 3,
     borderColor: "white",
