@@ -1,7 +1,7 @@
 import { Text, StyleSheet, View, Alert } from "react-native";
 import PrimaryButton from "../components/PrimaryButton";
 import Title from "../components/Title";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Colors from "../utils/Colors";
 import GuessDisplay from "../components/GuessDisplay";
 
@@ -15,19 +15,26 @@ function generateRandomBetween(min, max, exclude) {
   }
 }
 
-function GameScreen({ userInput }) {
-  let minBoundary = 1;
-  let maxBoundary = 100;
+function GameScreen({ userInput, onGameOver }) {
+  let minBoundary = useRef(1); //
+  let maxBoundary = useRef(100);
   const initialGuess = generateRandomBetween(
-    minBoundary,
-    maxBoundary,
+    minBoundary.current,
+    maxBoundary.current,
     userInput
   );
   const [currentGuess, guessUpdater] = useState(initialGuess);
 
+  useEffect(() => {
+    if (currentGuess === userInput) {
+      onGameOver();
+    }
+  }, [currentGuess, userInput, onGameOver]);
+
   function nextGuessHandler(direction) {
     // direction => 'lower' or 'greater'
     if (
+      //lying condition
       (direction === "lower" && currentGuess < userInput) ||
       (direction === "higher" && currentGuess > userInput)
     ) {
@@ -37,13 +44,15 @@ function GameScreen({ userInput }) {
       return;
     }
     if (direction === "lower") {
-      maxBoundary = currentGuess;
+      //if user says low
+      maxBoundary.current = currentGuess;
     } else {
-      minBoundary = currentGuess + 1;
+      //if user says high
+      minBoundary.current = currentGuess + 1;
     }
     const newRndNumber = generateRandomBetween(
-      minBoundary,
-      maxBoundary,
+      minBoundary.current,
+      maxBoundary.current,
       currentGuess
     );
     guessUpdater(newRndNumber);
