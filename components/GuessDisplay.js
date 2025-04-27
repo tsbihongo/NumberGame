@@ -14,6 +14,7 @@ const styles = StyleSheet.create({
   guessStyle: {
     color: "white",
     fontSize: 30,
+    fontFamily: "feather-bold",
   },
 
   displayGuess: {

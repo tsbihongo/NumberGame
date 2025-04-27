@@ -102,8 +102,9 @@ const styles = StyleSheet.create({
     borderRadius: 12,
   },
   instruction: {
+    fontFamily: "feather-bold",
     color: "white",
-    fontWeight: "bold",
+    //fontWeight: "bold",
     fontSize: 20,
   },
   textInput: {
@@ -114,6 +115,7 @@ const styles = StyleSheet.create({
     fontSize: 40,
     height: 90,
     color: "#ffffff",
+    fontFamily: "feather-bold",
   },
   buttonsContainer: {
     flexDirection: "row",

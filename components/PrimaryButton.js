@@ -34,10 +34,11 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   buttonText: {
+    fontFamily: "feather-bold",
     color: "white",
     textAlign: "center",
-    fontSize: 16,
-    fontWeight: "700",
+    fontSize: 15,
+    //fontWeight: "700",
   },
   pressedonIOS: {
     opacity: 0.75,

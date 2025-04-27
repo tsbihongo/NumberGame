@@ -118,7 +118,8 @@ const styles = StyleSheet.create({
   whatIguessed: {
     color: "white",
     fontSize: 18,
-    fontWeight: "bold",
+    //fontWeight: "bold",
+    fontFamily: "feather-bold",
   },
   logsHolder: {
     width: 350,
