@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
     color: "white",
     textAlign: "center",
     fontSize: 16,
+    fontWeight: "700",
   },
   pressedonIOS: {
     opacity: 0.75,

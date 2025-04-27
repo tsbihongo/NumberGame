@@ -4,6 +4,7 @@ import Title from "../components/Title";
 import { useState, useRef, useEffect } from "react";
 import Colors from "../utils/Colors";
 import GuessDisplay from "../components/GuessDisplay";
+import { Entypo } from "@expo/vector-icons";
 
 function generateRandomBetween(min, max, exclude) {
   const rndNum = Math.floor(Math.random() * (max - min)) + min;
@@ -18,13 +19,10 @@ function generateRandomBetween(min, max, exclude) {
 function GameScreen({ userInput, onGameOver }) {
   let minBoundary = useRef(1); //
   let maxBoundary = useRef(100);
-  const initialGuess = generateRandomBetween(
-    minBoundary.current,
-    maxBoundary.current,
-    userInput
-  );
-  const [currentGuess, guessUpdater] = useState(initialGuess);
 
+  const [currentGuess, guessUpdater] = useState(() =>
+    generateRandomBetween(minBoundary.current, maxBoundary.current, userInput)
+  );
   useEffect(() => {
     if (currentGuess === userInput) {
       onGameOver();
@@ -67,15 +65,17 @@ function GameScreen({ userInput, onGameOver }) {
 
           <View style={styles.buttonsHolder}>
             <PrimaryButton onTap={nextGuessHandler.bind(this, "higher")}>
-              Higher
+              <Entypo name="chevron-thin-up" color="green" size={32} />
             </PrimaryButton>
             <PrimaryButton onTap={nextGuessHandler.bind(this, "lower")}>
-              Lower
+              <Entypo name="chevron-thin-down" color="red" size={32} />
             </PrimaryButton>
           </View>
         </View>
         <View style={styles.logsHolder}>
-          <Text>Log of rounds:</Text>
+          <Text style={styles.whatIguessed}>What I guessed so far:</Text>
+          <Text>1</Text>
+          <Text>2</Text>
         </View>
       </View>
     </>
@@ -84,12 +84,14 @@ function GameScreen({ userInput, onGameOver }) {
 export default GameScreen;
 const styles = StyleSheet.create({
   wholeScreen: {
+    flex: 1,
     padding: 20,
     marginTop: 20,
     alignItems: "center",
   },
   guessContainer: {
-    height: 300,
+    flex: 1,
+    //height: 200,
     width: 250,
     backgroundColor: Colors.boxColor,
     justifyContent: "center",
@@ -97,18 +99,33 @@ const styles = StyleSheet.create({
     alignItems: "center",
     elevation: 20, //this wont work on iOS, other shadow properties have to use
     borderRadius: 12,
-  },
-  title: {
-    textAlign: "center",
-    fontSize: 24,
-    color: Colors.titleColor,
-    fontWeight: "bold",
+    flex: 1,
     borderWidth: 3,
-    borderColor: "white",
-    padding: 10,
+    borderColor: "yellow",
   },
+  // title: {
+  //   textAlign: "center",
+  //   fontSize: 24,
+  //   color: Colors.titleColor,
+  //   fontWeight: "bold",
+  //   borderWidth: 3,
+  //   borderColor: "white",
+  //   padding: 10,
+  // },
   buttonsHolder: {
     flexDirection: "row",
   },
-  logsHolder: {},
+  whatIguessed: {
+    color: "white",
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+  logsHolder: {
+    width: 350,
+    borderTopWidth: 6,
+    borderTopColor: "#c974c7",
+    marginTop: 10,
+    backgroundColor: "#f4def5",
+    flex: 3,
+  },
 });
