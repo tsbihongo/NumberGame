@@ -5,6 +5,7 @@ import { useState, useRef, useEffect } from "react";
 import Colors from "../utils/Colors";
 import GuessDisplay from "../components/GuessDisplay";
 import { Entypo } from "@expo/vector-icons";
+import GuessItem from "../components/GuessItem";
 
 function generateRandomBetween(min, max, exclude) {
   const rndNum = Math.floor(Math.random() * (max - min)) + min;
@@ -60,6 +61,7 @@ function GameScreen({ userInput, onGameOver }) {
     guessUpdater(newRndNumber);
     setGuessRounds((prevGuesses) => [newRndNumber, ...prevGuesses]);
   }
+  const guessRoundsListLength = guessRounds.length;
 
   return (
     <>
@@ -81,7 +83,12 @@ function GameScreen({ userInput, onGameOver }) {
           <Text style={styles.whatIguessed}>What I guessed so far:</Text>
           <FlatList
             data={guessRounds}
-            renderItem={(itemData) => <Text>{itemData.item}</Text>}
+            renderItem={(itemData) => (
+              <GuessItem
+                roundNumber={guessRoundsListLength - itemData.index}
+                myGuess={itemData.item}
+              />
+            )}
             keyExtractor={(item) => item}
           />
         </View>
@@ -125,16 +132,17 @@ const styles = StyleSheet.create({
   },
   whatIguessed: {
     color: "white",
-    fontSize: 18,
+    fontSize: 30,
     //fontWeight: "bold",
     fontFamily: "feather-bold",
   },
   logsHolder: {
+    padding: 10,
     width: 350,
     borderTopWidth: 6,
     borderTopColor: "#c974c7",
     marginTop: 10,
-    backgroundColor: "#f4def5",
+    //backgroundColor: "#f4def5",
     flex: 3,
   },
 });
