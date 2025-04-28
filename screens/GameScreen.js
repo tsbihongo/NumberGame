@@ -58,10 +58,7 @@ function GameScreen({ userInput, onGameOver }) {
       currentGuess
     );
     guessUpdater(newRndNumber);
-    setGuessRounds((previousGuessRounds) => [
-      newRndNumber,
-      ...previousGuessRounds,
-    ]);
+    setGuessRounds([newRndNumber, ...guessRounds]);
   }
 
   return (
