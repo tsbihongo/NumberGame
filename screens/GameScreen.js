@@ -1,4 +1,4 @@
-import { Text, StyleSheet, View, Alert } from "react-native";
+import { Text, StyleSheet, View, Alert, FlatList } from "react-native";
 import PrimaryButton from "../components/PrimaryButton";
 import Title from "../components/Title";
 import { useState, useRef, useEffect } from "react";
@@ -58,7 +58,7 @@ function GameScreen({ userInput, onGameOver }) {
       currentGuess
     );
     guessUpdater(newRndNumber);
-    setGuessRounds([newRndNumber, ...guessRounds]);
+    setGuessRounds((prevGuesses) => [newRndNumber, ...prevGuesses]);
   }
 
   return (
@@ -79,9 +79,11 @@ function GameScreen({ userInput, onGameOver }) {
         </View>
         <View style={styles.logsHolder}>
           <Text style={styles.whatIguessed}>What I guessed so far:</Text>
-          {guessRounds.map((guess) => (
-            <Text key={guess}>{guess}</Text>
-          ))}
+          <FlatList
+            data={guessRounds}
+            renderItem={(itemData) => <Text>{itemData.item}</Text>}
+            keyExtractor={(item) => item}
+          />
         </View>
       </View>
     </>
