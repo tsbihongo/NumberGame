@@ -16,6 +16,8 @@ export default function App() {
 
   const [gameIsOver, gameOverScreenLoader] = useState(false);
 
+  const [guessRounds, guessRoundsUpdater] = useState(0);
+
   const [fontsLoaded] = useFonts({
     "feather-bold": require("./assets/fonts/Feather-Bold.ttf"),
   });
@@ -37,8 +39,15 @@ export default function App() {
   function startGameHandler(finalNumberReceived) {
     finalNumberUpdater(finalNumberReceived);
   }
-  function gameOverHandler() {
+  function gameOverHandler(guessRounds) {
     gameOverScreenLoader(true);
+    guessRoundsUpdater(guessRounds);
+  }
+
+  function restartHandler() {
+    finalNumberUpdater(null);
+    gameOverScreenLoader(false);
+    guessRoundsUpdater(0);
   }
 
   if (finalNumber && !gameIsOver) {
@@ -46,7 +55,13 @@ export default function App() {
       <GameScreen userInput={finalNumber} onGameOver={gameOverHandler} />
     );
   } else if (gameIsOver) {
-    screen = <GameOverScreen />;
+    screen = (
+      <GameOverScreen
+        roundsNumber={guessRounds}
+        userNumber={finalNumber}
+        onRestart={restartHandler}
+      />
+    );
   }
 
   return (

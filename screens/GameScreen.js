@@ -25,11 +25,14 @@ function GameScreen({ userInput, onGameOver }) {
   );
   useEffect(() => {
     if (currentGuess === userInput) {
-      onGameOver();
+      onGameOver(guessRoundsNumber);
     }
   }, [currentGuess, userInput, onGameOver]);
 
+  const [guessRoundsNumber, guessRoundsUpdater] = useState(0);
+
   function nextGuessHandler(direction) {
+    guessRoundsUpdater(guessRoundsNumber + 1);
     // direction => 'lower' or 'greater'
     if (
       //lying condition
