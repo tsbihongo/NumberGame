@@ -30,6 +30,7 @@ function GameScreen({ userInput, onGameOver }) {
   }, [currentGuess, userInput, onGameOver]);
 
   const [guessRoundsNumber, guessRoundsUpdater] = useState(0);
+  const [guessRounds, setGuessRounds] = useState([currentGuess]);
 
   function nextGuessHandler(direction) {
     guessRoundsUpdater(guessRoundsNumber + 1);
@@ -57,6 +58,10 @@ function GameScreen({ userInput, onGameOver }) {
       currentGuess
     );
     guessUpdater(newRndNumber);
+    setGuessRounds((previousGuessRounds) => [
+      newRndNumber,
+      ...previousGuessRounds,
+    ]);
   }
 
   return (
@@ -77,8 +82,9 @@ function GameScreen({ userInput, onGameOver }) {
         </View>
         <View style={styles.logsHolder}>
           <Text style={styles.whatIguessed}>What I guessed so far:</Text>
-          <Text>1</Text>
-          <Text>2</Text>
+          {guessRounds.map((guess) => (
+            <Text key={guess}>{guess}</Text>
+          ))}
         </View>
       </View>
     </>
